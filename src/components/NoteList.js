@@ -1,4 +1,5 @@
 import { useState } from "react";
+import AddNote from "./AddNote";
 
 const NoteList = () => {
     const [notes, setNotes] = useState([
@@ -7,8 +8,8 @@ const NoteList = () => {
         { id: 3, title: "note 3" }
     ]);
 
-    const addNote = () => {
-        setNotes([...notes, { id: 4, title: "note 4" }])
+    const newNote = (title) => {
+        setNotes([...notes, { id: notes.length + 1, title: title }])
     }
     return (
         <>
@@ -19,7 +20,7 @@ const NoteList = () => {
                     )
                 })}
             </ul>
-            <button onClick={addNote}>Add Note</button>
+            <AddNote newNote={newNote} />
         </>
     )
 }
