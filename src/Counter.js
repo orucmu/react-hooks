@@ -1,8 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App(props) {
     const [count, setCount] = useState(props.count);
-    const [text, setText] = useState(props.text)
+    const [text, setText] = useState(props.text);
+
+    useEffect(() => {
+        console.log("count");
+    }, [count])
+
+    useEffect(() => {
+        console.log('componentDidMount');
+    }, [])
+
+    useEffect(() => {
+        console.log('componentDidUpdate');
+    });
+
     return (
         <>
             <p>Butona {count} kez tıkladınız.</p>
@@ -13,6 +26,10 @@ function App(props) {
             <input type="text" value={text} onChange={(e) => setText(e.target.value)} />
         </>
     );
+}
+
+App.defaultProps = {
+    count: 5, text: ''
 }
 
 export default App;
