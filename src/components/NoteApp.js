@@ -3,7 +3,7 @@ import AddNote from "./AddNote";
 import Navbar from './Navbar'
 import NoteList from './NoteList';
 import notesReducer from '../reducers/notesReducer';
-
+import NotesContext from "../contexts/notesContext";
 
 const NoteApp = () => {
     const [notes, dispatch] = useReducer(notesReducer, []);
@@ -24,14 +24,14 @@ const NoteApp = () => {
         localStorage.setItem("notes", JSON.stringify(notes))
     }, [notes])
 
-
-
     return (
-        <div className="container">
-            <Navbar notes={notes} />
-            <NoteList notes={notes} dispatch={dispatch} />
-            <AddNote notes={notes} dispatch={dispatch} />
-        </div>
+        <NotesContext.Provider value={{ notes, dispatch }}>
+            <div className="container">
+                <Navbar />
+                <NoteList />
+                <AddNote />
+            </div>
+        </NotesContext.Provider>
     )
 }
 
